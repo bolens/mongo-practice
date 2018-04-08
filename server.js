@@ -9,6 +9,7 @@ var cheerio = require("cheerio");
 var db = require("./models");
 
 var PORT = process.env.PORT || 3000;
+var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoPractice';
 
 var app = express();
 
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static("public"));
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/mongoPractice", {});
+mongoose.connect(MONGODB_URI, {});
 
 app.get("/scrape", function(req, res) {
   axios.get("https://www.theonion.com/").then(function(response) {
